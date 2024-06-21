@@ -6,23 +6,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
-import { withInterceptorsFromDi, provideHttpClient} from '@angular/common/http';
+import { withInterceptorsFromDi, provideHttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { tokenInterceptor } from './auth/interceptor/token.interceptor';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { SharedModule } from './shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    {provide: HTTP_INTERCEPTORS, useClass: tokenInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
