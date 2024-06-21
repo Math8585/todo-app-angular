@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/todo-app-angular/",
             "outputPath": "dist/todo-app-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
